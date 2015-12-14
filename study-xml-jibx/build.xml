@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     2015年12月13日 上午11:04:27                                                        
+
+     project_name:  study-xml-jibx    
+     project_desc:  JiBX是一款非常优秀的XML（Extensible Markup Language）数据绑定框架，
+     				它提供灵活的绑定映射文件，实现数据对象与XML文件之间的转换，并不需要
+     				修改既有的Java类。另外，它的转换效率是目前很多其他开源项目都无法比你的。
+                   
+     project_autor: hailiuang.jiang                                                                
+     ====================================================================== -->
+<project name="study-xml-jibx" default="default" basedir=".">
+	<available property="jibx-home" file="F:/study/maven/repos/org/jibx/jibx-bind/1.2.6/jibx-bind-1.2.6.jar"/>
+	
+    <description>description</description>
+	
+	<path id="classpath">
+		<dirset dir="${basedir}/target/classes"/>
+		<dirset dir="${basedir}/target/test-classes"/>
+		<dirset dir="F:/study/maven/repos/org/jibx/jibx-bind/1.2.6/" includes="*.jar"/>
+		<dirset dir="F:/study/maven/repos/org/jibx/jibx-run/1.2.6/" includes="*.jar"/>
+		<dirset dir="F:/study/maven/repos/bcel/bcel/5.1/" includes="*.jar"/>
+	</path>
+	
+	<target name="default" depends="bindgen">
+	</target>
+	
+	<target name="bindgen">
+		<echo message="Running BindGen tool"/>
+		<java classpathref="classpath" fork="true" failonerror="true" classname="org.jibx.binding.BindingGenerator">
+			<!-- <arg value="-s"/>
+			<arg value="${basedir}/src/main/java/com/hailiang/study/xml/jibx/model"/> -->
+			<arg value="com.hailiang.study.xml.jibx.model.Order"/>
+		</java>
+	</target>
+</project>
